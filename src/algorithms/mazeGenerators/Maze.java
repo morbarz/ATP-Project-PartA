@@ -11,6 +11,8 @@ public class Maze {
 
     }
     public void Print(Maze MazeToPrint){
+        System.out.println("{" + this.rows +"," + this.columns +"}");
+    }
 
     }
     public Position getStartPosition(Maze Smaze){
