@@ -10,6 +10,6 @@ public class Maze {
         this.maze = new int[row][col];
 
     }
-    ///Maze MazeGenerator = new Maze(int )
+
 
 }
