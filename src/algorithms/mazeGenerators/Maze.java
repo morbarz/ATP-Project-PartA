@@ -20,6 +20,4 @@ public class Maze {
     }
     public Position getGoalPosition(Maze Gmaze){
 
-
-
     }
