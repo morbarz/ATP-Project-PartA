@@ -3,7 +3,7 @@ package algorithms.mazeGenerators;
 public class EmptyMazeGenerator extends AMazeGenerator{
     @Override
     public Maze generate(int row, int col) { //create Maze with mazegenerator
-        Maze newMaze = new Maze();
+        Maze newMaze = new Maze(row, col);
         newMaze.MazeGenerator(row, col);
         for (int i = 0 ; i<row ; i++){
             for (int j = 0 ; j<col ; j++){

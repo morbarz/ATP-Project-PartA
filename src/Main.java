@@ -1,17 +1,25 @@
 import algorithms.mazeGenerators.EmptyMazeGenerator;
 import algorithms.mazeGenerators.Maze;
+import algorithms.mazeGenerators.Position;
 import algorithms.mazeGenerators.SimpleMazeGenerator;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
-        //EmptyMazeGenerator maze1 = new EmptyMazeGenerator();
-        //maze1.generate(100,100);
+        EmptyMazeGenerator maze0 = new EmptyMazeGenerator();
+        maze0.generate(100,100);
         SimpleMazeGenerator maze1 = new SimpleMazeGenerator();
         maze1.generate(100,100);
         System.out.println(maze1);
+        Position p = new Position(2,3);
+        System.out.println(p);
+//            SimpleMazeGenerator mazeGenerator = new SimpleMazeGenerator(10, 10);
+//            mazeGenerator.generate(10,10);
+//            mazeGenerator.display();
+        }
+
+
 
     }
 
 
-}
