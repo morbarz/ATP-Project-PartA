@@ -13,17 +13,21 @@ public class Maze {
     }
 
     public void Print(Maze MazeToPrint) {
-        System.out.println("{"+ this.rows +"," + this.columns + "}" );
 
     }
 
     public Position getStartPosition(Maze Smaze) {
-
+        Position startPosition = new Position();
+        startPosition.position(0, 0);
+        return startPosition;
     }
 
+
     public Position getGoalPosition(Maze Gmaze) {
+        Position GoalPosition = new Position();
+        GoalPosition.position(this.rows, this.columns);
+        return GoalPosition;
 
 
     }
 }
-
