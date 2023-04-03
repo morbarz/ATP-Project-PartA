@@ -10,6 +10,14 @@ public class Maze {
         this.maze = new int[row][col];
 
     }
+    public void Print(Maze MazeToPrint){
+
+    }
+    public Position getStartPosition(Maze Smaze){
+
+    }
+    public Position getGoalPosition(Maze Gmaze){
 
 
-}
+
+    }
