@@ -9,8 +9,8 @@ public class Main {
         EmptyMazeGenerator maze0 = new EmptyMazeGenerator();
         maze0.generate(100,100);
         SimpleMazeGenerator maze1 = new SimpleMazeGenerator();
-        maze1.generate(100,100);
-        System.out.println(maze1);
+        //maze1.generate(100,100);
+        //System.out.println(maze1);
         Position p = new Position(2,3);
         System.out.println(p);
 //            SimpleMazeGenerator mazeGenerator = new SimpleMazeGenerator(10, 10);
