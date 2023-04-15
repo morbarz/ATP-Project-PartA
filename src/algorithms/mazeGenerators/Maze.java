@@ -10,7 +10,8 @@ public class Maze
     public int col;
     public Position[][] PositionArray;
 
-        public void Maze(int row, int col) {
+
+    public  Maze(int row, int col) {
             try {
                 if (row == 0 && col == 0)
                     throw new Exception("can't be  Maze");
