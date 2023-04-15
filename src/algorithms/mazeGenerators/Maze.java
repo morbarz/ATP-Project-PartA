@@ -16,11 +16,21 @@ public class Maze
                     throw new Exception("can't be  Maze");
             }
             catch (Exception e) {e.getMessage();}
+
             this.maze = new int[row][col];
             this.PositionArray = new Position[row][col];
             this.startPosition=new Position();
             this.goalPosition = new Position();
-            this.
+            this.startPosition.setColumnIndex(0);
+            this.startPosition.setRowIndex(0);
+            this.goalPosition.setRowIndex(this.maze.length-1);
+            this.goalPosition.setColumnIndex(this.maze[0].length-1);
+            //now create default maze with no walls :
+            for (int i= 0 ;i<row ; i++){
+                for (int j = 0 ; j <col ; j++){
+                    this.maze[i][j]=0;
+                }
+            }
 
 
         }
@@ -34,14 +44,12 @@ public class Maze
 
 
     public Position getStartPosition(Maze Smaze) {
-        Position startPosition = new Position(0,0);
-        return startPosition;
+        return this.startPosition;
     }
 
 
     public Position getGoalPosition(Maze Gmaze) {
-        Position GoalPosition = new Position(this.rows, this.columns);
-        return GoalPosition;
+        return this.goalPosition;
 
 
     }
