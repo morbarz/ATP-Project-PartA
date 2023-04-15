@@ -16,9 +16,9 @@ public class Main {
 //            SimpleMazeGenerator mazeGenerator = new SimpleMazeGenerator(10, 10);
 //            mazeGenerator.generate(10,10);
 //            mazeGenerator.display();
-        Maze maze = mazeGenerator.generate(100/*rows*/, 100/*columns*/);
+     //   Maze maze = mazeGenerator.generate(100/*rows*/, 100/*columns*/);
 // prints the maze
-        maze.print();
+     //   maze.print();
 
     }
 

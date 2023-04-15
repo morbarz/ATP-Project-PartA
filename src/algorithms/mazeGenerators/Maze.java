@@ -1,5 +1,7 @@
 package algorithms.mazeGenerators;
 
+import java.util.Random;
+
 public class Maze
 {
     // constructor creates an empty maze[][] & initialize 0's
@@ -34,6 +36,7 @@ public class Maze
             }
 
 
+
         }
 
 
@@ -65,7 +68,7 @@ public class Maze
     }
 
 
-    public Position getStartPosition(Maze Smaze) {
+    public Position getStartPosition() {
         return this.startPosition;
     }
 
