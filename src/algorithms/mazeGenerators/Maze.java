@@ -10,7 +10,8 @@ public class Maze
     public int col;
     public Position[][] PositionArray;
 
-        public void Maze(int row, int col) {
+
+    public  Maze(int row, int col) {
             try {
                 if (row == 0 && col == 0)
                     throw new Exception("can't be  Maze");
@@ -38,7 +39,28 @@ public class Maze
 
 
 
-    public void Print(Maze MazeToPrint) {
+    public void print(Maze MazeToPrint) {
+
+        for (int row = 0; row < this.maze.length; row++)
+        {
+            System.out.printf("%s","{ ");
+            for (int col = 0; col < this.maze[0].length; col++)
+            {
+                if (row == startPosition.getRowIndex() && col == startPosition.getColumnIndex())
+                {
+                    System.out.printf("%s","S ");
+                    continue;
+                }
+                if (row == goalPosition.getRowIndex()  && col == goalPosition.getColumnIndex())
+                {
+                    System.out.printf("%s","E ");
+                    continue;
+                }
+
+                System.out.printf("%s",this.maze[row][col]+ " ");
+            }
+            System.out.printf("%s", "}\n");
+        }
 
     }
 
