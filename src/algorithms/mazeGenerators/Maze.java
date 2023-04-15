@@ -42,7 +42,7 @@ public class Maze
 
 
 
-    public void print(Maze MazeToPrint) {
+    public void print() {
 
         for (int row = 0; row < this.maze.length; row++)
         {
@@ -73,7 +73,7 @@ public class Maze
     }
 
 
-    public Position getGoalPosition(Maze Gmaze) {
+    public Position getGoalPosition() {
         return this.goalPosition;
 
 
