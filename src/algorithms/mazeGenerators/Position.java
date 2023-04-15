@@ -22,11 +22,11 @@ public class Position {
     public int getRowIndex(){
         return rowX;
     }
-    public int setColumnIndex(int col) {
-        return colY;
+    public void setColumnIndex(int col) {
+        this.colY=col;
     }
-    public int setRowIndex(int row){
-        return rowX;
+    public void setRowIndex(int row) {
+        this.rowX=row;
     }
     @Override
     public String toString(){

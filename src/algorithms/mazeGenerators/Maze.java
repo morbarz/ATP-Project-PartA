@@ -20,8 +20,7 @@ public class Maze
             this.PositionArray = new Position[row][col];
             this.startPosition=new Position();
             this.goalPosition = new Position();
-            this.row=row;
-            this.col=col;
+            this.
 
 
         }
