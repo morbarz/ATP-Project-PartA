@@ -1,18 +1,28 @@
 package algorithms.mazeGenerators;
 
-public class Maze {
-    int columns;
-    int rows;
-    int[][] maze;
-    public Maze(int row, int col) {//constructor
-        this.rows = row;
-        this.columns = col;
-        this.maze = new int[row][col];
-    }
+public class Maze
+{
+    // constructor creates an empty maze[][] & initialize 0's
+    public int[][] maze;
+    public Position startPosition;
+    public Position goalPosition;
+    public int row;
+    public int col;
+    public Position[][] PositionArray;
 
-        public Maze MazeGenerator(int row, int col) {
-            Maze newMaze = new Maze(row,col);
-            return newMaze;
+        public void Maze(int row, int col) {
+            try {
+                if (row == 0 && col == 0)
+                    throw new Exception("can't be  Maze");
+            }
+            catch (Exception e) {e.getMessage();}
+            this.maze = new int[row][col];
+            this.PositionArray = new Position[row][col];
+            this.startPosition=new Position();
+            this.goalPosition = new Position();
+            this.row=row;
+            this.col=col;
+
 
         }
 
