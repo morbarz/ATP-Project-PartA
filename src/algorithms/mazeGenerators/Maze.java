@@ -21,6 +21,8 @@ public class Maze
             catch (Exception e) {e.getMessage();}
 
             this.maze = new int[row][col];
+            this.row=row;
+            this.col=col;
             this.PositionArray = new Position[row][col];
             this.startPosition=new Position();
             this.goalPosition = new Position();
@@ -32,6 +34,8 @@ public class Maze
             for (int i= 0 ;i<row ; i++){
                 for (int j = 0 ; j <col ; j++){
                     this.maze[i][j]=0;
+                    this.PositionArray[i][j] = new Position(i,j);
+
                 }
             }
 

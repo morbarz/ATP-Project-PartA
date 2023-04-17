@@ -7,19 +7,62 @@ import java.util.Random;
 public class MyMazeGenerator extends AMazeGenerator {
     private Maze FullWallM ;
     private List<Position> PositionList ;// List with the position's from algorithm
+
+    public MyMazeGenerator() {//init
+       this.PositionList=new ArrayList<>();
+    this.FullWallM=null;}
+
+
     @Override
     public Maze generate(int row, int col) {
-        //create maze Full of walls
-        Maze primaze = new Maze(row, col);//init maze (without walls)
+        FullWallM= new Maze(row, col);//init maze (without walls)
+        FullfillMaze(FullWallM); //  Fullfill maze  of walls
+        Position startP = new Position();//init the start position
+        startP = getRandomposition(row,col); //now we choose random points for this position
+        FullWallM.startPosition=startP;
+        //Markvisit(startP);//mark this position as visited
+        Passage(startP,FullWallM);
+        PositionList.add(startP);//add this random position to the list of the position'
+        while (!PositionList.isEmpty()) {
+            Random ran = new Random();
+            int index = ran.nextInt(PositionList.size());
+            Position p = PositionList.get(index);
+            if (!p.isChecked && CheckNeighbors(FullWallM, p)) {
+                Passage(p, FullWallM);
+                Break(FullWallM, p);
+                AddNewWalls(p.getRowIndex(), p.getColumnIndex());}
+                PositionList.remove(p);
+
+        }
+            Random r = new Random();
+            int randomPick = r.nextInt(2);
+            if (randomPick==1)
+                Passage(this.FullWallM.PositionArray[row-1][col-2], FullWallM);
+            else
+                Passage(this.FullWallM.PositionArray[row-2][col-1], FullWallM);
+            Passage(this.FullWallM.PositionArray[row-1][col-1], FullWallM);
+
+
+        return FullWallM;
+
+
+
 
 
     }
         Position newPosition ;
 
+    public void Passage(Position p, Maze m) //break the wall inside the maze in this specific position and make it as checked position
+    {
+
+        int r = p.getRowIndex();
+        int c = p.getColumnIndex();
+        FullWallM.PositionArray[r][c].isChecked = true;
+        m.maze[r][c] = 0;
+    }
 
 
-
-    public Position getRandomposition(int row, int col) {
+        public Position getRandomposition(int row, int col) {
         Position randP;
         {
             randP = new Position();
@@ -57,14 +100,14 @@ public void Markvisit(Position v){ // mark position as visited
      }
 
 public boolean checkPosition(int Prow , int Pcol , Maze toC){ // check if this position value is in bound
-        return  (Pcol<=toC.col && Prow<=toC.row && Prow>0 && Pcol>0 ) ;
+        return  (Pcol<=toC.goalPosition.getColumnIndex() && Prow<=toC.goalPosition.getRowIndex() && Prow>=0 && Pcol>=0 ) ;
     }
     public void  addneighbor (Position p, Maze pfrom){ // add position neigbor's to PositionList ;
         //add only if position is not yet visited and if position is in bound of maze .
         if(!pfrom.PositionArray[p.getColumnIndex() - 1][p.getRowIndex()].isChecked && checkPosition((p.getColumnIndex() - 1),p.getRowIndex(),pfrom)){
             PositionList.add(pfrom.PositionArray[p.getColumnIndex() - 1][p.getRowIndex()]);}
 
-        if(!pfrom.PositionArray[p.getColumnIndex() + 1][p.getRowIndex()].isChecked&& checkPosition((p.getColumnIndex() + 1),p.getRowIndex(),pfrom))){
+        if(!pfrom.PositionArray[p.getColumnIndex() + 1][p.getRowIndex()].isChecked&& checkPosition((p.getColumnIndex() + 1),p.getRowIndex(),pfrom)){
             PositionList.add(pfrom.PositionArray[p.getColumnIndex() + 1][p.getRowIndex()]);}
 
         if(!pfrom.PositionArray[p.getColumnIndex() ][p.getRowIndex()-1].isChecked&& checkPosition(p.getColumnIndex() ,p.getRowIndex()-1,pfrom)){
@@ -73,6 +116,120 @@ public boolean checkPosition(int Prow , int Pcol , Maze toC){ // check if this p
         if(!pfrom.PositionArray[p.getColumnIndex() ][p.getRowIndex()+1].isChecked && checkPosition(p.getColumnIndex() ,p.getRowIndex()+1,pfrom)){
             PositionList.add(pfrom.PositionArray[p.getColumnIndex() ][p.getRowIndex()+1]);}
     }
-}
+    public boolean CheckNeighbors(Maze m, Position p) {
+        int r = p.getRowIndex();
+        int c = p.getColumnIndex();
+        if (checkPosition(r + 1, c, m))
+            if (FullWallM.PositionArray[r + 1][c].isChecked)
+                return false;
+        if (checkPosition(r + 1, c + 1, m))
+            if (FullWallM.PositionArray[r + 1][c + 1].isChecked)
+                return false;
+        if (checkPosition(r, c + 1, m))
+            if (FullWallM.PositionArray[r][c + 1].isChecked)
+                return false;
+        if (checkPosition(r - 1, c, m))
+            if (FullWallM.PositionArray[r - 1][c].isChecked)
+                return false;
+        if (checkPosition(r - 1, c - 1, m))
+            if (FullWallM.PositionArray[r - 1][c - 1].isChecked)
+                return false;
+        if (checkPosition(r, c -1, m))
+            if (FullWallM.PositionArray[r][c - 1].isChecked)
+                return false;
+        if (checkPosition(r - 1, c + 1, m))
+            if (FullWallM.PositionArray[r - 1][c + 1].isChecked)
+                return false;
+        if (checkPosition(r + 1, c - 1, m))
+            if (FullWallM.PositionArray[r + 1][c - 1].isChecked)
+                return false;
+        return true;
+    }
+    public void AddNewWalls(int beginRow, int beginCol) {
+        // adds the neighbor below if it is in bound.
+        if (checkPosition(beginRow + 2, beginCol, FullWallM)) {
+            Position p2 = FullWallM.PositionArray[beginRow + 2][beginCol];
+            if (!p2.isChecked) {
+                PositionList.add(p2);
+            }
+        }
+
+        // adds the neighbor above if it is in bound.
+        if (checkPosition(beginRow, beginCol + 2, FullWallM)) {
+            Position p2 = FullWallM.PositionArray[beginRow][beginCol + 2];
+            if (!p2.isChecked) {
+                PositionList.add(p2);
+            }
+        }
+
+        // adds the neighbor from the left if it is in bound.
+        if (checkPosition(beginRow - 2, beginCol, FullWallM)) {
+            Position p2 = FullWallM.PositionArray[beginRow-2][beginCol ];
+            if (!p2.isChecked) {
+                PositionList.add(p2);
+            }
+        }
+
+        // adds the neighbor from the right if it is in bound.
+        if (checkPosition(beginRow, beginCol -2, FullWallM)) {
+            Position p2 = FullWallM.PositionArray[beginRow][beginCol -2];
+            if (!p2.isChecked) {
+                PositionList.add(p2);
+            }
+        }
+
+    }
+    public void Break(Maze m, Position p)
+    {
+        Position p1, p2, p3, p4;
+        if (checkPosition( p.getRowIndex()+2, p.getColumnIndex(),m))
+        {
+            p1 = FullWallM.PositionArray[p.getRowIndex() + 2][p.getColumnIndex()];
+            if (p1.isChecked)
+            {
+                Position pos = FullWallM.PositionArray[p.getRowIndex()+1][p.getColumnIndex()];
+                Passage(pos, FullWallM);
+                AddNewWalls(pos.getRowIndex(),pos.getColumnIndex());
+                return;
+            }
+
+        }
+        if (checkPosition( p.getRowIndex(), p.getColumnIndex()+2,m))
+        {
+            p2 = FullWallM.PositionArray[p.getRowIndex()][p.getColumnIndex() + 2];
+            if (p2.isChecked)
+            {
+                Position pos = FullWallM.PositionArray[p.getRowIndex()][p.getColumnIndex()+1];
+                Passage(pos, FullWallM);
+                AddNewWalls(pos.getRowIndex(),pos.getColumnIndex());
+                return;
+            }
+        }
+
+        if (checkPosition( p.getRowIndex()-2, p.getColumnIndex(),m))
+        {
+            p3 = FullWallM.PositionArray[p.getRowIndex()-2][p.getColumnIndex()];
+            if (p3.isChecked)
+            {
+                Position pos = FullWallM.PositionArray[p.getRowIndex()-1][p.getColumnIndex()];
+                Passage(pos, FullWallM);
+                AddNewWalls(pos.getRowIndex(),pos.getColumnIndex());
+                return;
+            }
+        }
+        if (checkPosition( p.getRowIndex(), p.getColumnIndex()-2,m))
+        {
+            p4 = FullWallM.PositionArray[p.getRowIndex()][p.getColumnIndex()-2];
+            if (p4.isChecked)
+            {
+                Position pos = FullWallM.PositionArray[p.getRowIndex()][p.getColumnIndex()-1];
+                Passage(pos, FullWallM);
+                AddNewWalls(pos.getRowIndex(),pos.getColumnIndex());
+                return;
+            }
+        }
+    }
+    }
+
 
 
