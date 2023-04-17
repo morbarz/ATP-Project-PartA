@@ -23,15 +23,15 @@ public class MyMazeGenerator extends AMazeGenerator {
         //Markvisit(startP);//mark this position as visited
         Passage(startP,FullWallM);
         PositionList.add(startP);//add this random position to the list of the position'
-        while (!PositionList.isEmpty()) {
-            Random ran = new Random();
+        while (!PositionList.isEmpty()) { // if the position list is not empty- continue
+            Random ran = new Random();//choose a random position from the list
             int index = ran.nextInt(PositionList.size());
             Position p = PositionList.get(index);
-            if (!p.isChecked && CheckNeighbors(FullWallM, p)) {
-                Passage(p, FullWallM);
-                Break(FullWallM, p);
-                AddNewWalls(p.getRowIndex(), p.getColumnIndex());}
-                PositionList.remove(p);
+            if (!p.isChecked && CheckNeighbors(FullWallM, p)) { // if this position didnt visited , and her neighbored is in bound and never visited
+                Passage(p, FullWallM);//make this like it didnt have wall , and mark it as visited
+                Break(FullWallM, p);//break the wall between this position to it neighbor's if we not visit them and if they in bound
+                AddNewWalls(p.getRowIndex(), p.getColumnIndex());}//finally add neighbors to the list if you didnt visited them
+                PositionList.remove(p);//remove this position either way
 
         }
             Random r = new Random();
