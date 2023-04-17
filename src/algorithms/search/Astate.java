@@ -6,6 +6,8 @@ public abstract class Astate {
     public Astate cameFrom;
     public boolean visit;
     public double distance;
+    public boolean croos;
 
 }
+
 
