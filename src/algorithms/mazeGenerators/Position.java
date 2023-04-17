@@ -32,7 +32,8 @@ public class Position {
     public String toString(){
         return "{" + getRowIndex() + " , "+ getColumnIndex() + "}";
     }
-    public void setp(boolean checke_p) {this.isChecked = checke_p;}
+    public void setp(boolean checke_p)
+    {this.isChecked = checke_p;}
 
 
 }

@@ -5,6 +5,7 @@ public abstract class Astate {
     public double cost;
     public Astate cameFrom;
     public boolean visit;
+    public double distance;
 
 }
 
