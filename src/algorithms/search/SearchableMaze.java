@@ -11,11 +11,11 @@ public class SearchableMaze implements ISearchable
     public SearchableMaze(Maze maze){
         this.m=maze;
     }
-    public Astate getStartState()
+    public AState getStartState()
     {
         return new MazeState(m.startPosition);
     }
-    public Astate getGoalState()
+    public AState getGoalState()
     {
         return new MazeState(m.goalPosition);
     }
