@@ -28,15 +28,15 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm
         sol.states.add(state);
         if (state == null)
             return sol;
-        if (state.cameFrom == null)
+        if (state.getCameFrom() == null)
         {
             return sol;
         }
-        AState curr = state.cameFrom;
+        AState curr = state.getCameFrom();
         while (curr != null)
         {
             sol.states.add(curr);
-            curr = curr.cameFrom;
+            curr = curr.getCameFrom();
         }
         for (int i = sol.states.size()-1; i >= 0; i--)
         {
