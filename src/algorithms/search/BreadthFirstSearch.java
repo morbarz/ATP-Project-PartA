@@ -18,7 +18,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         AState goal = s.getGoalState();//the end state
 
         queue.add(start); // add start state to queue
-        start.setVisited(true);
+        start.setIsvisited();
         start.updateVisited();
         marked.put(start.getState(), true); // mark start state as visited
         visitedNodes++;
@@ -33,7 +33,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
                     marked.put(curr.getState(), true); // mark state as visited
                     curr.setCameFrom(visitedState);
                     queue.add(curr); // add state to queue
-                    curr.setVisited(true);
+                    curr.setIsvisited();
                     visitedNodes++;
                     curr.updateVisited();
                 }

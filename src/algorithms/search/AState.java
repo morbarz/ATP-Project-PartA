@@ -4,9 +4,9 @@ public abstract class AState {
     private String state;
     private double cost;
     private AState cameFrom;
-    public boolean visit;
+    public boolean isvisited;
     public double distance;
-    public boolean croos;
+    public boolean crossTome;
     public void setState(String state)
     {
         this.state = state;
@@ -32,7 +32,7 @@ public abstract class AState {
     {
         this.cameFrom = cameFrom;
     }
-    public abstract void setVisited(boolean visited);
+    public void setIsvisited(){this.isvisited=true;};
     public AState getCameFrom()
     {
         return this.cameFrom;
