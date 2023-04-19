@@ -11,7 +11,7 @@ public class MazeState extends AState
         p.setp(this.isVisited());
         this.setState("{" + position.getRowIndex() + ","+ p.getColumnIndex() + "}");
         crossTome = false;
-        distance = 0;
+        setDistance(0);
     }
     public void setVisited(boolean visited)
     {

@@ -15,52 +15,43 @@ public class BestFirstSearch extends BreadthFirstSearch {
         this.marked = new HashMap<>();
     }
 
-
+    // Override the search method from BreadthFirstSearch
+    // Uses a priority queue to prioritize states with lower distance and cost
+    // Marks visited states and keeps track of the visited nodes count
     public AState search(ISearchable s) {
         AState start = s.getStartState();
         AState goal = s.getGoalState();
-
-        this.getQueue().add(start); // add start state to queue
-        start.setVisited(true);
+        pq.add(start);
+        start.setIsvisited();
         start.updateVisited();
-        marked.put(start.getState(), true); // mark start state as visited
-        visitedNodes++;
-
-        while (!this.getQueue().isEmpty() && !goal.isVisited()) {
-            AState visitedState = this.getQueue().poll(); // remove state with highest priority (i.e., smallest cost)
-            ArrayList<AState> neighbors = s.getAllPossibleStates(visitedState); // get all neighboring states
+        marked.put(start.getState(), true);
+        this.visitedNodes++;
+        while (!pq.isEmpty()) {
             AState u = pq.remove();
+            ArrayList<AState> neighbors = s.getAllPossibleStates(u);
             updateCameFrom(neighbors, u);
             updateCost(neighbors);
             updateDistance(neighbors);
-
-            for (AState curr : neighbors) {
-                if (!marked.containsKey(curr.getState())) { // if state has not been visited before
-                    marked.put(curr.getState(), true); // mark state as visited
-                    curr.setCameFrom(visitedState);
-                    this.getQueue().add(curr); // add state to queue
-                    curr.setVisited(true);
+            int i = 0;
+            while (!neighbors.isEmpty())
+            {
+                AState curr = neighbors.get(i);
+                if (!marked.containsKey(curr.getState())) {
+                    marked.put(curr.getState(), true);
+                    pq.add(curr);
+                    curr.setIsvisited();
                     visitedNodes++;
                     curr.updateVisited();
                 }
-
-                if (curr.getState().compareTo(goal.getState()) == 0) // if goal state is found
+                if (curr.getState().compareTo(goal.getState()) == 0)
                     return curr;
+
+                neighbors.remove(curr);
             }
         }
-
-        // goal state was not found
         return null;
     }
-
-
-
-
-    public PriorityQueue<AState> getPq() {return pq;}
-    public void setPq(PriorityQueue<AState> pq) {this.pq = pq;}
-    public HashMap<String, Boolean> getMarked() {return marked;}
-    public void setMarked(HashMap<String, Boolean> marked) {this.marked = marked;}
-
+    // Updates the 'cameFrom' field of each node in the given array to the given state
     public void updateCameFrom(ArrayList<AState> array, AState s)
     {
         int i = 0;
@@ -72,6 +63,7 @@ public class BestFirstSearch extends BreadthFirstSearch {
         }
     }
 
+    // Updates the 'cost' field of each node in the given array based on whether it has crossed a time zone or not
     public void updateCost(ArrayList<AState> array)
     {
         int i = 0;
@@ -80,14 +72,14 @@ public class BestFirstSearch extends BreadthFirstSearch {
             AState node = array.get(i);
             if (node.getCameFrom() != null)
             {
-                if (node.croos)
+                if (node.crossTome)
                     node.setCost(1.5 + node.getCameFrom().getCost());
                 else
                     node.setCost(1 + node.getCameFrom().getCost());
             }
             else
             {
-                if (node.croos)
+                if (node.crossTome)
                     node.setCost(1.5);
                 else
                     node.setCost(1);
@@ -96,6 +88,7 @@ public class BestFirstSearch extends BreadthFirstSearch {
         }
     }
 
+    // Updates the 'distance' field of each node in the given array based on its parent's distance
     public void updateDistance(ArrayList<AState> array)
     {
         int i = 0;
@@ -103,24 +96,31 @@ public class BestFirstSearch extends BreadthFirstSearch {
         {
             AState curr = array.get(i);
             if (curr.getCameFrom() == null)
-                curr.distance = 0;
+                curr.setDistance(0);
             else
-                curr.distance = curr.getCameFrom().distance + 1;
+                curr.setDistance(curr.getCameFrom().getDistance() + 1);
             i++;
         }
     }
 
-    public int getNumberOfNodesEvaluated() {return visitedNodes;}
+    public int getNumberOfNodesEvaluated()
+    {
+        return visitedNodes;
+    }
 
-    public String getName() {return this.name;}
+    public String getName()
+    {
+        return name;
+    }
 
+    //comparison  based on the distance and cost of each state, with states that have smaller distances and costs being considered "greater" than states with larger distances and costs.
     static class theComparator implements Comparator<AState>
     {
         public int compare(AState s1, AState s2)
         {
-            if (s1.distance > s2.distance)
+            if (s1.getDistance() > s2.getDistance())
                 return 1;
-            if (s1.distance == s2.distance)
+            if (s1.getDistance() == s2.getDistance())
             {
                 if (s1.getCost() > s2.getCost())
                     return 1;

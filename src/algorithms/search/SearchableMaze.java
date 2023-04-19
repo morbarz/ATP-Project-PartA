@@ -80,7 +80,7 @@ public class SearchableMaze implements ISearchable
             if (maze.maze[row+1][col-1] == 0)
             {
                 MazeState m = new MazeState(p5);
-                m.croos = true;
+                m.crossTome = true;
                 neighbors.add(m);
             }
         }
@@ -90,7 +90,7 @@ public class SearchableMaze implements ISearchable
             if (maze.maze[row+1][col+1] == 0)
             {
                 MazeState m = new MazeState(p6);
-                m.croos = true;
+                m.crossTome = true;
                 neighbors.add(m);
             }
         }
@@ -100,7 +100,7 @@ public class SearchableMaze implements ISearchable
             if (maze.maze[row-1][col+1] == 0)
             {
                 MazeState m = new MazeState(p7);
-                m.croos = true;
+                m.crossTome = true;
                 neighbors.add(m);
             }
         }
@@ -110,7 +110,7 @@ public class SearchableMaze implements ISearchable
             if (maze.maze[row-1][col-1] == 0)
             {
                 MazeState m = new MazeState(p8);
-                m.croos = true;
+                m.crossTome = true;
                 neighbors.add(m);
             }
         }

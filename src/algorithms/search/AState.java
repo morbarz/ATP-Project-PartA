@@ -5,7 +5,7 @@ public abstract class AState {
     private double cost;
     private AState cameFrom;
     public boolean isvisited;
-    public double distance;
+    private int distance;
     public boolean crossTome;
     public void setState(String state)
     {
@@ -33,6 +33,11 @@ public abstract class AState {
         this.cameFrom = cameFrom;
     }
     public void setIsvisited(){this.isvisited=true;};
+    public int getDistance()
+    {
+        return this.distance ;
+    }
+
     public AState getCameFrom()
     {
         return this.cameFrom;
@@ -41,6 +46,9 @@ public abstract class AState {
         return this.isvisited;
     }
     public abstract void updateVisited();
+    public void setDistance(int distance1){this.distance=distance1;};
+
+
 }
 
 

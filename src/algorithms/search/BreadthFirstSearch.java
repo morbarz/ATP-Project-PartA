@@ -64,11 +64,6 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         return name;
     }
 
-    public Queue<AState> getQueue() {
-        return queue;
-    }
-
-
 
 }
 
