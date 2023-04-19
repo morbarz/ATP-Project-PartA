@@ -21,12 +21,13 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
         start.setIsvisited();
         stack.push(start);
         while (!stack.isEmpty()){
-         if (start.state==goal.state){
+         if (start.getState()==goal.getState()){
              return start;
          }
          else {
              stack.pop();
-             A
+
+             stack.push()
          }
         }
 

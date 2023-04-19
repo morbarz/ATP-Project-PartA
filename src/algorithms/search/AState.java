@@ -38,7 +38,7 @@ public abstract class AState {
         return this.cameFrom;
     }
     public boolean isVisited(){
-        return this.visit;
+        return this.isvisited;
     }
     public abstract void updateVisited();
 }
