@@ -30,4 +30,7 @@ public class MazeState extends AState
     }
 
 
+    public Position getPosition() {
+        return this.p;
+    }
 }
